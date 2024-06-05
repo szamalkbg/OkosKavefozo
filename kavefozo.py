@@ -14,7 +14,7 @@ class Kavefozo():
         self.isz = InfraredSensor(Port.S4)
 
     def indul(self):
-        self.ev3.speaker.set_volume(40)
+        self.ev3.speaker.set_volume(30)
 
         while True:
             gombok = self.isz.buttons(1)
@@ -24,9 +24,16 @@ class Kavefozo():
                 wait(400)
                 self.ev3.speaker.play_file('piroskek.wav')
                 wait(300)
-                if self.isz.buttons(1):
-                    self.ev3.speaker.play_file('elindul.wav')
-                    wait(1000)
-                    self.ev3.speaker.play_file('coffee.wav')
-                    wait(1000)
-                    self.ev3.speaker.play_file('keszkave.wav')
+                while True:
+                    gombok2 = self.isz.buttons(1)
+                    if gombok2:
+                        self.ev3.speaker.play_file('elindul.wav')
+                        wait(1000)
+                        self.ev3.speaker.play_file('coffee.wav')
+                        wait(1000)
+                        break
+                break
+
+indul = Kavefozo()
+indul.indul()
+
